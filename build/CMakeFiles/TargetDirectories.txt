@@ -1,3 +1,0 @@
-/home/kan/Dev/unlimited-base-conversion/build/CMakeFiles/ubc.dir
-/home/kan/Dev/unlimited-base-conversion/build/CMakeFiles/edit_cache.dir
-/home/kan/Dev/unlimited-base-conversion/build/CMakeFiles/rebuild_cache.dir
