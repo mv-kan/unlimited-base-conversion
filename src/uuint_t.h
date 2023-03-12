@@ -16,9 +16,16 @@ class uuint_t  {
     std::vector<UIntInternal> _chunks{};
 
 public:
+    uuint_t(size_t initValue=0);
+
+    uuint_t(std::string_view n, uint base);
+    
     // convert uuint to string in specific base (up to 36)
     std::string ToStr(uint base=10);
     
+    // convert string with specific base (from 2 to 36) to uuint_t 
+    void FromStr(std::string_view n, uint base);
+
     // basic math 
     void Add(const uuint_t& n);
 
