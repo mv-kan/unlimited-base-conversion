@@ -1,7 +1,7 @@
 #include "uuint_t.h"
 #include <stdexcept>
 
-uuint_t::uuint_t(size_t initValue = 0) {
+uuint_t::uuint_t(size_t initValue) {
     throw std::runtime_error("Not Implemented");
 }
 
@@ -10,7 +10,7 @@ uuint_t::uuint_t(std::string_view n, uint base){
 }
 
 // convert uuint to string in specific base (up to 36)
-std::string uuint_t::ToStr(uint base = 10) {
+std::string uuint_t::ToStr(uint base) {
     throw std::runtime_error("Not Implemented");
 }
 
