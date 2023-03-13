@@ -87,11 +87,43 @@ namespace ubc {
 
     void uuint_t::Divide(details::UIntInternal n)
     {
-        throw std::runtime_error("Not Implemented");
+        details::UIntInternal borrow{0};
+
+        for (size_t i = 0; i < _chunks.Len(); i++)
+        {
+            // reversed index
+            size_t index{_chunks.Len() - i - 1};
+
+            // with cusve braces init compiler throws a lot of warnings
+            details::UIntInternal sum = borrow + _chunks.At(index);
+
+            details::UIntInternal division = sum / n;
+            details::UIntInternal remainder = sum % n;
+
+            _chunks.At(index) = division;
+
+            borrow = remainder * details::uintInternalBase;
+        }
+        // keep len to its required minimum
+        _chunks.Trim();
     }
 
     details::UIntInternal uuint_t::CalcModule(const details::UIntInternal n) const
     {
-        throw std::runtime_error("Not Implemented");
+        details::UIntInternal borrow{};
+        details::UIntInternal remainder{};
+        for (size_t i = 0; i < _chunks.Len(); i++)
+        {
+            // reversed index
+            size_t index{_chunks.Len() - i - 1};
+
+            // with cusve braces init compiler throws a lot of warnings
+            details::UIntInternal sum = borrow + _chunks.At(index);
+
+            remainder = sum % n;
+
+            borrow = remainder * details::uintInternalBase;
+        }
+        return remainder;
     }
 }
