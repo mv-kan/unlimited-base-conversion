@@ -45,7 +45,7 @@ namespace ubc {
         }
         for (size_t i = 0; i < std::max(_chunks.Len(), n._chunks.Len()); i++)
         {
-            // mLen always bigger or equal to huge.mLen
+            // _chunks.Len() always bigger or equal to huge._chunks.Len()
             details::UIntInternal nChunk{(i < n._chunks.Len()) ? n._chunks.At(i) : static_cast<details::UIntInternal>(0)};
 
             // sum of remainder, huge value and *this
@@ -54,7 +54,7 @@ namespace ubc {
             _chunks.At(i) = sum % details::uintInternalBase;
             remainder = sum / details::uintInternalBase;
 
-            // if no remainder left and huge.mLen is already walked thru then we calculated addition
+            // if no remainder left and huge._chunks.Len() is already walked thru then we calculated addition
             // we can return here
             if (!remainder && i >= n._chunks.Len())
                 return;
@@ -68,7 +68,21 @@ namespace ubc {
 
     void uuint_t::Multiply(const details::UIntInternal n)
     {
-        throw std::runtime_error("Not Implemented");
+        details::UIntInternal carry{0};
+
+        for (size_t i = 0; i < _chunks.Len(); i++)
+        {
+            size_t multiplied = static_cast<size_t>(_chunks.At(i)) * n + carry;
+
+            _chunks.At(i) = multiplied % details::uintInternalBase;
+            carry = multiplied / details::uintInternalBase;
+        }
+
+        // num * _chunks.At(i) cannot overflow carry to the point we need to do iteration
+        if (carry > 0)
+        {
+            _chunks.At(_chunks.Len()) = carry;
+        }
     }
 
     void uuint_t::Divide(details::UIntInternal n)
