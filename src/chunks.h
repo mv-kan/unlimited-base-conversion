@@ -38,10 +38,13 @@ namespace ubc
         // Get number of chunks
         size_t Len() const;
 
+        size_t Capacity() const;
+
         // trim tailing zeros
         void Trim();
 
         void Reserve(size_t n);
+
     };
 } // namespace ubc
 
