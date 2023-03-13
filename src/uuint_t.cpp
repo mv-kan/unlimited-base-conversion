@@ -149,7 +149,24 @@ namespace ubc
     // convert string with specific base (from 2 to 36) to uuint_t
     uuint_t FromStr(std::string_view str, uint base)
     {
-        throw std::runtime_error("Not Implemented");
+        size_t len = str.length();
+
+        uuint_t result{};
+        uuint_t tmp{};
+        uuint_t numDigit{1}; // numerical digit
+
+        for (size_t i = 0; i < len; i++)
+        {
+            details::UIntInternal decimal{details::ToInt(str[len - i - 1])};
+
+            tmp = numDigit;
+            tmp.Multiply(decimal);
+            
+            result.Add(tmp);
+            numDigit.Multiply(base);
+        }
+
+        return result;
     }
 
     std::string ToStr(uuint_t n, uint base)
