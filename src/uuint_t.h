@@ -3,37 +3,39 @@
 
 #include <iostream>
 #include <vector>
+#include "chunks.h"
 
-#define UINT_INTERNAL_BASE 1000000000
-
-const uint uintInternalBase = UINT_INTERNAL_BASE;
-
-using UIntInternal = std::uint64_t;
-/*
-uuint_t - unlimited unsigned int type 
-*/
-class uuint_t  {
-    std::vector<UIntInternal> _chunks{};
-
-public:
-    uuint_t(size_t initValue=0);
-
-    uuint_t(std::string_view n, uint base);
+// ubc stands for unlimited base converter
+namespace ubc {
+    // details is namespace that shouldn't be accessed by a user
     
-    // convert uuint to string in specific base (up to 36)
-    std::string ToStr(uint base=10);
-    
-    // convert string with specific base (from 2 to 36) to uuint_t 
-    void FromStr(std::string_view n, uint base);
+    /*
+    uuint_t - unlimited unsigned int type
+    */
+    class uuint_t
+    {
+        
+        Chunks _chunks{};
+    public:
+        uuint_t(size_t initValue = 0);
 
-    // basic math 
-    void Add(const uuint_t& n);
+        uuint_t(std::string_view n, uint base);
 
-    void Multiply(const UIntInternal n);
+        // convert uuint to string in specific base (up to 36)
+        std::string ToStr(uint base = 10) const;
 
-    void Divide(UIntInternal n);
+        // convert string with specific base (from 2 to 36) to uuint_t
+        void FromStr(std::string_view n, uint base);
 
-    UIntInternal CalcModule(const UIntInternal n) const;
-};
+        // basic math
+        void Add(const uuint_t &n);
+
+        void Multiply(const details::UIntInternal n);
+
+        void Divide(details::UIntInternal n);
+
+        details::UIntInternal CalcModule(const details::UIntInternal n) const;
+    };
+}
 
 #endif
