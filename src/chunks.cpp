@@ -5,7 +5,7 @@ namespace ubc
     void Chunks::Trim()
     {
         int i{};
-        for (i = _chunks.size() - 1; i >= 0 && _chunks[i] == 0; --i)
+        for (i = _chunks.size() - 1; i > 0 && _chunks[i] == 0; --i)
             ;
         _chunks.resize(i + 1);
     }

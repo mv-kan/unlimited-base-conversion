@@ -2,11 +2,10 @@
 #include "uuint_t.h"
 
 int main() {
-	ubc::uuint_t n{100};
-	ubc::uuint_t n2{980};
-	std::cout << "hi" << std::endl;
-	n.Add(n2);
-	n.Multiply(10);
-	n.Divide(2);
-	std::cout << n.CalcModule(10) << std::endl;
+	ubc::uuint_t n{18446744073709551615};
+	std::cout << ubc::ToStr(n, 10) << std::endl;
+	std::cout << ubc::ToStr(n, 16) << std::endl;
+	std::cout << ubc::ToStr(n, 16).length() << std::endl;
+	std::cout << ubc::ToStr(n, 2) << std::endl;
+	std::cout << ubc::ToStr(n, 2).length() << std::endl;
 }

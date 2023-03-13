@@ -1,7 +1,35 @@
 #include "uuint_t.h"
 #include <stdexcept>
+#include <algorithm>
 
-namespace ubc {
+namespace ubc
+{
+    namespace details
+    {
+        std::unordered_map<char, size_t> &CharNum()
+        {
+            static std::unordered_map<char, size_t> map{};
+            if (map.size() == 0)
+            {
+                std::string_view num_char = NumChar();
+
+                for (size_t i = 0; i < num_char.length(); i++)
+                {
+                    map[num_char[i]] = i;
+                }
+            }
+            return map;
+        }
+        size_t ToInt(char c)
+        {
+            return details::CharNum()[c];
+        }
+        char ToChar(size_t n)
+        {
+            return details::NumChar()[n];
+        }
+    }
+
     uuint_t::uuint_t(size_t initValue)
     {
         size_t len{};
@@ -18,16 +46,8 @@ namespace ubc {
         throw std::runtime_error("Not Implemented");
     }
 
-    // convert uuint to string in specific base (up to 36)
-    std::string uuint_t::ToStr(uint base) const
-    {
-        throw std::runtime_error("Not Implemented");
-    }
-
-    // convert string with specific base (from 2 to 36) to uuint_t
-    void uuint_t::FromStr(std::string_view n, uint base)
-    {
-        throw std::runtime_error("Not Implemented");
+    bool uuint_t::IsZero() const{
+        return _chunks.At(0) == 0 && _chunks.Len() == 1;
     }
 
     // basic math
@@ -125,5 +145,26 @@ namespace ubc {
             borrow = remainder * details::uintInternalBase;
         }
         return remainder;
+    }
+    // convert string with specific base (from 2 to 36) to uuint_t
+    uuint_t FromStr(std::string_view str, uint base)
+    {
+        throw std::runtime_error("Not Implemented");
+    }
+
+    std::string ToStr(uuint_t n, uint base)
+    {
+        std::string result{};
+
+        do
+        {
+            details::UIntInternal remainder = n.CalcModule(base);
+            result.push_back(details::ToChar(remainder));
+            n.Divide(base);
+        } while (!n.IsZero());
+
+        // reverse result string
+        reverse(result.begin(), result.end());
+        return result;
     }
 }
