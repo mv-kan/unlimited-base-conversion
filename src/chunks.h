@@ -27,7 +27,7 @@ namespace ubc
         
         
     public:
-        Chunks();
+        Chunks() = default;
 
         // get chunk at specific index
         details::UIntInternal &At(size_t i);
