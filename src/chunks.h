@@ -40,6 +40,8 @@ namespace ubc
 
         // trim tailing zeros
         void Trim();
+
+        void Reserve(size_t n);
     };
 } // namespace ubc
 

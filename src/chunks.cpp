@@ -7,8 +7,16 @@ namespace ubc {
             ;
         _chunks.resize(i + 1);
     }
+    
+    void Chunks::Reserve(size_t n)
+    {
+        _chunks.reserve(n);
+    }
 
     details::UIntInternal &Chunks::At(size_t i) {
+        if (i >= _chunks.size())
+            _chunks.resize(i + 1);
+
         return _chunks[i];
     }
 

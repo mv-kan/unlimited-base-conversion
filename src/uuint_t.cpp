@@ -4,7 +4,13 @@
 namespace ubc {
     uuint_t::uuint_t(size_t initValue)
     {
-        throw std::runtime_error("Not Implemented");
+        size_t len{};
+        do
+        {
+            _chunks.At(len) = initValue % details::uintInternalBase;
+            ++len;
+            initValue /= details::uintInternalBase;
+        } while (initValue);
     }
 
     uuint_t::uuint_t(std::string_view n, uint base)
