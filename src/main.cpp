@@ -2,6 +2,28 @@
 #include "uuint_t.h"
 #include <string>
 
+#include <chrono> // for std::chrono functions
+class Timer
+{
+private:
+	// Type aliases to make accessing nested type easier
+	using Clock = std::chrono::steady_clock;
+	using Second = std::chrono::duration<double, std::ratio<1>>;
+
+	std::chrono::time_point<Clock> m_beg{Clock::now()};
+
+public:
+	void reset()
+	{
+		m_beg = Clock::now();
+	}
+
+	double elapsed() const
+	{
+		return std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();
+	}
+};
+
 int main(int argc, char** argv) {
 
 	if (argc != 4) {
@@ -16,8 +38,14 @@ int main(int argc, char** argv) {
 	size_t inputBase = std::stoul(_inputBase);
 	size_t outputBase = std::stoul(_outputBase);
 	try {
+		//Timer t;
+
 		ubc::uuint_t n = ubc::FromStr(_numInput, inputBase);
+		//std::cout <<"FromStr: " << t.elapsed() << std::endl;
+		//t.reset();
 		std::cout << ubc::ToStr(n, outputBase) << std::endl;
+
+		//std::cout << "ToStr: " << t.elapsed() << std::endl;
 	} catch(const std::runtime_error& e) {
 		std::cerr << e.what() << std::endl;
 		return 1;

@@ -22,6 +22,7 @@ namespace ubc
         }
         size_t ToInt(char c, size_t base)
         {
+            // TODO change operator[] to find, and handle not found case
             size_t result { details::CharNum()[c] };
             if (base - 1 < result) {
                 static char buff[100];
