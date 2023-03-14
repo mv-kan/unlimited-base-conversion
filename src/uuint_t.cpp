@@ -20,13 +20,25 @@ namespace ubc
             }
             return map;
         }
-        size_t ToInt(char c)
+        size_t ToInt(char c, size_t base)
         {
-            return details::CharNum()[c];
+            size_t result { details::CharNum()[c] };
+            if (base - 1 < result) {
+                static char buff[100];
+                std::snprintf(buff, sizeof(buff), "cannot convert \"%c\" char to int because it violates base confinement of base \"%zu\"", c, base);
+                throw std::runtime_error(buff);
+            }
+            return result;
         }
-        char ToChar(size_t n)
+        char ToChar(size_t n, size_t base)
         {
-            return details::NumChar()[n];
+            const auto& numchar = details::NumChar();
+            if (base > numchar.length()) {
+                static char buff[100];
+                std::snprintf(buff, sizeof(buff), "cannot convert \"%zu\" int to char, because base \"%zu\" is higher than num of available characters in details::NumChar() (num of available chars \"%zu\")", n, base, numchar.length());
+                throw std::runtime_error(buff);
+            }
+            return numchar[n];
         }
     }
 
@@ -157,7 +169,7 @@ namespace ubc
 
         for (size_t i = 0; i < len; i++)
         {
-            details::UIntInternal decimal{details::ToInt(str[len - i - 1])};
+            details::UIntInternal decimal{details::ToInt(str[len - i - 1], base)};
 
             tmp = numDigit;
             tmp.Multiply(decimal);
@@ -176,7 +188,7 @@ namespace ubc
         do
         {
             details::UIntInternal remainder = n.CalcModule(base);
-            result.push_back(details::ToChar(remainder));
+            result.push_back(details::ToChar(remainder, base));
             n.Divide(base);
         } while (!n.IsZero());
 

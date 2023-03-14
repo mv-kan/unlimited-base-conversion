@@ -18,14 +18,15 @@ namespace ubc
     {
         inline std::string_view NumChar()
         {
+            // this is max to 62 base number
             return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         }
         // this is needed in case we want to change NumChar values and characters
         // CharNum return depends on NumChar() return
         std::unordered_map<char, size_t>& CharNum();
-
-        size_t ToInt(char c);
-        char ToChar(size_t n);
+        // we need additional base arg to stay confined in frame of base we converting to or from
+        size_t ToInt(char c, size_t base);
+        char ToChar(size_t n, size_t base);
     }
 
     class uuint_t
