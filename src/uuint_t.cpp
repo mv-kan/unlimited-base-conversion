@@ -34,7 +34,7 @@ namespace ubc
         {
             const auto& numchar = details::NumChar();
             if (base > numchar.length()) {
-                static char buff[100];
+                static char buff[300];
                 std::snprintf(buff, sizeof(buff), "cannot convert \"%zu\" int to char, because base \"%zu\" is higher than num of available characters in details::NumChar() (num of available chars \"%zu\")", n, base, numchar.length());
                 throw std::runtime_error(buff);
             }
