@@ -1,6 +1,6 @@
 # UBC (Unlimited Base Converter)
 
-Download binary from releases (its only for linux) and then 
+Download binary from [releases](https://github.com/mv-kan/unlimited-base-conversion/releases/) (its only for linux) and then 
 ```
 ubc [the number you want to convert] [the number base] [result base]
 example1:       ubc 10101 2 10
