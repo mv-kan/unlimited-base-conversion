@@ -40,7 +40,7 @@ inline std::string_view NumChar()
 cd unlimited-base-conversion
 mkdir build
 cd build
-cmake ../src
+cmake -DCMAKE_BUILD_TYPE=Release ../src
 make
 ```
 4. voala, enjoy more bases with fresh compiled `ubc` bin
