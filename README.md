@@ -17,6 +17,30 @@ output4:        Error (because lowercase letters are not present in 36 base only
 ```
 You can convert **any** number of **any** base to **any** base* (to 62 base max, but you can change it in code).
 
+# How to compile for dummies
+
+1. download source code
+```
+git clone https://github.com/mv-kan/unlimited-base-conversion.git
+```
+
+2. compile the code (**required** cmake and make to be installed)
+```
+cd unlimited-base-conversion
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ../src
+make
+```
+3. voala, enjoy more bases with fresh compiled `ubc` bin
+4. example use 
+```
+./ubc FFFF 16 2
+```
+output should be 
+```
+1111111111111111
+```
 # My specific needs require more than 62 bases!!!
 
 Well in that case you need to:
