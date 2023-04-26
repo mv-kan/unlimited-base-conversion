@@ -1,6 +1,7 @@
-![ubc logo](./static/UBC.svg)
+
 # UBC (Unlimited Base Converter)
 
+<img src="./static/UBC.png"  width="150" style="padding: 10px"/>
 
 Download binary from [releases](https://github.com/mv-kan/unlimited-base-conversion/releases/) (its only for linux) and then 
 ```
