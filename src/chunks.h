@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdint>
 
 #define UUINT_INTERNAL_BASE 1000000000
 

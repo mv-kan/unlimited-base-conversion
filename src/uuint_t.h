@@ -19,7 +19,7 @@ namespace ubc
         inline std::string_view NumChar()
         {
             // this is max to 62 base number
-            return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
         }
         // this is needed in case we want to change NumChar values and characters
         // CharNum return depends on NumChar() return

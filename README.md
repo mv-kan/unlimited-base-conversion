@@ -1,4 +1,6 @@
+![ubc logo](./static/UBC.svg)
 # UBC (Unlimited Base Converter)
+
 
 Download binary from [releases](https://github.com/mv-kan/unlimited-base-conversion/releases/) (its only for linux) and then 
 ```
@@ -41,7 +43,8 @@ output should be
 ```
 1111111111111111
 ```
-# My specific needs require more than 62 bases!!!
+
+# My specific needs require more than 64 bases!!!
 
 Well in that case you need to:
 1. download source code
@@ -53,10 +56,10 @@ git clone https://github.com/mv-kan/unlimited-base-conversion.git
 // in ./src/uuint_t.h
 inline std::string_view NumChar()
 {
-   // this is max to 62 base number
+   // this is max to 64 base number
    // but if you add chars to this, my program would be able to convert to any base you want
-   // each index of this string is int value of each char, so if we were to add another char to this string, the last char would convert to 62 in int, and max base would be 63
-   return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+   // each index of this string is int value of each char, so if we were to add another char to this string, the last char would convert to 64 in int, and max base would be 65
+   return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
 }
 ```
 3. compile the code (**required** cmake and make to be installed)
